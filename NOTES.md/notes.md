@@ -97,3 +97,65 @@ Location and job_function have very few missing values.
   contain 100% missing values.
 - These columns are preserved without guessing values.
 - They may be excluded from model features later.
+
+### Seniority Level Analysis
+
+- Total job records: 2,471
+- Not Applicable: 965 (39.05%)
+- Mid-Senior level: 550 (22.26%)
+- Associate: 455 (18.41%)
+- Director: 223 (9.02%)
+- Entry level: 168 (6.80%)
+- Internship: 99 (4.01%)
+- Executive: 11 (0.45%)
+
+## Observations:
+- Not Applicable is the largest category (39.05%).
+- Mid-Senior level is the most common specified seniority category.
+- Entry-level and internship opportunities together represent 10.81% of the dataset.
+- Executive positions have the lowest representation.
+- A significant portion of job postings does not specify seniority information.
+
+### Employment Type Analysis
+
+- Total job records: 2,471
+- Full-time: 2,244 (90.81%)
+- Contract: 102 (4.13%)
+- Internship: 89 (3.60%)
+- Part-time: 18 (0.73%)
+- Volunteer: 16 (0.65%)
+- Temporary: 1 (0.04%)
+- Other: 1 (0.04%)
+
+## Observations:
+- Full-time positions dominate the dataset (90.81%).
+- Contract jobs represent 4.13% of all postings.
+- Internship opportunities account for 3.60%.
+- Part-time and volunteer positions have very low representation.
+- Temporary and Other categories have only one record each.
+
+## Day 3 – Role Family Quality Audit
+
+### Objective
+Evaluate the reliability of the `role_family_hint` column using manual inspection.
+
+### Audit Method
+- Selected 5 random job records from each of 15 role families.
+- Total unique records audited: 75.
+- Classified each record as Clearly Correct, Questionable, or Incorrect.
+- Preserved the original `role_family_hint` values.
+
+### Results
+- Clearly Correct: 46 (61.33%)
+- Questionable: 10 (13.33%)
+- Incorrect: 19 (25.33%)
+
+### Key Findings
+- Finance, HR and Operations showed 5/5 correct labels in the sample.
+- Customer Success showed 0/5 clearly correct labels.
+- DevOps, Mobile, Non-tech and Product need further validation.
+
+### Conclusion
+The `role_family_hint` column contains useful information but cannot be considered fully reliable ground truth. Further validation is required before using it as an ML target.
+
+Note: These results represent a small manual sample of 75 records, not the accuracy of the entire dataset.
