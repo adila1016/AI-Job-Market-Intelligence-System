@@ -127,7 +127,7 @@ Location and job_function have very few missing values.
 - Temporary: 1 (0.04%)
 - Other: 1 (0.04%)
 
-## Observations:
+## Observations:s
 - Full-time positions dominate the dataset (90.81%).
 - Contract jobs represent 4.13% of all postings.
 - Internship opportunities account for 3.60%.
@@ -159,3 +159,31 @@ Evaluate the reliability of the `role_family_hint` column using manual inspectio
 The `role_family_hint` column contains useful information but cannot be considered fully reliable ground truth. Further validation is required before using it as an ML target.
 
 Note: These results represent a small manual sample of 75 records, not the accuracy of the entire dataset.
+
+### Machine Learning – Role Family Classification
+
+**Objective:** Predict job role families using job titles and job descriptions.
+
+**Dataset:** 2,471 job records  
+**Input Features:** Job Title + Lemmatized Description  
+**Target:** role_family_hint (15 classes)  
+**Feature Extraction:** TF-IDF (unigrams and bigrams)
+
+**Models Evaluated:**
+
+| Model | Accuracy | Macro F1 |
+|---|---:|---:|
+| Logistic Regression | 61.01% | 0.60 |
+| Multinomial Naive Bayes | 12.53% | 0.01 |
+| Linear SVM | 68.48% | 0.66 |
+
+**Selected Model:** Linear SVM
+
+**Model Testing:**
+- Python Backend Developer → backend
+- HR Executive → hr
+- Digital Marketing Specialist → marketing
+- Financial Analyst → data
+- Data Engineer → data
+
+**Conclusion:** Linear SVM achieved the best performance among the three tested models. Some role-family predictions require further improvement. Model evaluation is based on existing weak labels, which contain some classification errors.
