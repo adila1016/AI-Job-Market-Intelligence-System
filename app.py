@@ -250,7 +250,7 @@ elif page == "Job Role Prediction":
     st.divider()
 
     job_title = st.text_input(
-        "Enter Job Title",
+        "Enter Job Title(optional)",
         placeholder="Example: Data Scientist"
     )
 
@@ -260,15 +260,16 @@ elif page == "Job Role Prediction":
         height=250
     )
 
+    
     if st.button(
         "🚀 Predict Job Role",
         use_container_width=True
     ):
 
-        if not job_title.strip() or not job_description.strip():
+        if not job_description.strip():
 
             st.warning(
-                "Please enter both job title and job description."
+                "Please enter a job description."
             )
 
         else:
@@ -276,6 +277,27 @@ elif page == "Job Role Prediction":
             original_text = (
                 job_title + " " + job_description
             )
+
+            cleaned_text = preprocess_text(
+                original_text
+            )
+
+            if not cleaned_text.strip():
+
+                st.warning(
+                    "Please enter meaningful job description text."
+                )
+
+            else:
+
+                text_vector = tfidf.transform(
+                    [cleaned_text]
+                )
+
+                prediction = model.predict(
+                    text_vector
+                )[0]
+
 
             cleaned_text = preprocess_text(
                 original_text
